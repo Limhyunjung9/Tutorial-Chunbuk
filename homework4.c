@@ -11,7 +11,7 @@ int **create_matrix(int row, int col)
          return NULL;
         }
 
-        int **matrix;
+        int **matrix;                                    //2차원 배열이기 때문에 이중포인터가 필요하다.
 
         matrix = (int**)malloc(row * sizeof(int*));      //2차원 배열은 행과 열로 구분되어 메모리를 차지하기 때문에 이중포인터가 필요하다.
         
@@ -38,7 +38,7 @@ int free_matrix(int **matrix, int row, int col)   //동적할당함수를 해제시키는 함
 {
     for (int i=0; i<row; i++)
        {
-           free(matrix[i]);     //댐블링 현상을 막기 위해 먼저 행이 차지하고 있는 메모리의 동적할당을 해제시킨다.
+           free(matrix[i]);     //댐블링 현상을 막기 위해 먼저 행이 차지하고 있는 메모리를 해제시킨다.
        }
        free(matrix);  //그 후 실제데이터가 존재하고 있는 나머지 영역의 동적할당을 해제한다.
 
@@ -86,7 +86,7 @@ int transpose_matrix(int **matrix, int **matrix_t, int row, int col) //전치행렬�
 	{
 		for (int j = 0; j < col; j++)
 		{
-			matrix_t[j][i] = matrix[i][j];  
+			matrix_t[j][i] = matrix[i][j];  //전치행렬은 행과 열이 반대이기 떄문에 i와 j의 위치를 바꾸어준다.
 		}
 	}
 
@@ -113,7 +113,7 @@ int addition_matrix(int **matrix_a, int **matrix_b, int **matrix_sum, int row, i
     {
         for(int j=0; j<col; j++)
         {
-            matrix_sum[i][j]= matrix_a[i][j] + matrix_b[i][j]; 
+            matrix_sum[i][j]= matrix_a[i][j] + matrix_b[i][j]; //행렬 A + B 
         }
     }
      return 0;
@@ -141,7 +141,7 @@ int subtraction_matrix(int **matrix_a, int **matrix_b, int **matrix_sub, int row
     {
         for(int j=0; j<col; j++)
         {
-            matrix_sub[i][j]= matrix_a[i][j] - matrix_b[i][j];
+            matrix_sub[i][j]= matrix_a[i][j] - matrix_b[i][j];  //행렬 A- B 
         }
     }
     return 0;
@@ -179,16 +179,14 @@ int multiply_matrix(int **matrix_a, int **matrix_t, int **matrix_axt, int row, i
 	{
 		for (int j = 0; j < col; j++)
 		{
-			for (int k = 0; k < row; k++) //행렬 간 곱셈 시 앞 행렬의 열과 뒷 행렬의 행이 같아야한다.
+			for (int k = 0; k < row; k++) //행렬 곱셈 시 앞 행렬의 열과 뒷 행렬의 행이 같아야한다. 그 수를 k로 표현.
 			{
 				matrix_axt[i][j] += ( matrix_a[i][k] * matrix_t[k][j]);
 
 			}
-
 		}
-
 	}
- return 0;
+    return 0;
 
 } 
 
@@ -219,7 +217,7 @@ int main()
 
      srand(time(NULL));    //매 실행마다 A,B 행렬에 들어가는 값을 바꿔주기 위해 필요하다.
 
-      
+      /* 동적메모리 할당 방식을 통해 행렬 생성 */
      matrix_a = create_matrix(row, col);
      matrix_b = create_matrix(row, col);
      matrix_sum = create_matrix(row,col);
@@ -290,12 +288,12 @@ int main()
      {
          free_matrix(matrix_t,col,row);
      }
-
-     if(matrix_a!=NULL || matrix_b != NULL || matrix_sum != NULL || matrix_t != NULL || matrix_sub != NULL || matrix_axt != NULL)
+     /* main()함수 후처리 검사 */
+     if(matrix_a!=NULL || matrix_b != NULL || matrix_sum != NULL || matrix_t != NULL || matrix_sub != NULL || matrix_axt != NULL)  // 결과 중 오류 없을 때
      {
          return 0;
      }      
-     else 
+     else //오류가 있을때
          return NULL;
 
 
