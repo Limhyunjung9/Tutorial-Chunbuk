@@ -364,8 +364,7 @@ int invertList(headNode* h)
 		printf("nothingtoinvert...\n");
 		return 0;
 	}
-	listNode *n = h->first
-		;
+	listNode *n = h->first;
 	listNode *trail = NULL;
 	listNode *middle = NULL;
 
