@@ -127,7 +127,7 @@ int initialize(listNode** h) {
 /* 메모리 해제 */
 int freeList(listNode* h)
 {
-     if(h->rlink ==h)
+     if(h->rlink ==h) //해제 할 노드가 존재하지 않을 때
     {
         free(h);
         return 0;
@@ -137,10 +137,10 @@ int freeList(listNode* h)
         listNode *A = h->rlink ;
         listNode *B = h->rlink;
 
-        while(A->rlink != NULL && A != h)
+        while(A->rlink != NULL && A != h) //마지막 노드까지 반복
         {
             B = A;
-            A =A->rlink;
+            A =A->rlink;  //A와 B를 한 칸씩 앞으로 이동
 
             free(B);
 
@@ -199,19 +199,22 @@ void printList(listNode* h) {
  */
 int insertLast(listNode* h, int key) 
 {
-    
-	listNode * newnode = (listNode *)malloc(sizeof(listNode));
-    listNode *last ;
-
-    newnode-> key= key;
-    newnode ->rlink = NULL;
-    newnode-> llink = NULL;
-
-    if(h == NULL) //리스트가 공백일 때
+      if(h == NULL) //리스트에 head가 없을 때
     {
         printf("리스트에 노드가 존재하지 않습니다. \n");
         return 0;
+	}
 
+	listNode * newnode = (listNode *)malloc(sizeof(listNode)); //동적할당
+    listNode *last ; //마지막 노드를 가리키는 last를 선언
+
+    newnode-> key= key; //입력받은 key를 노드에 저장
+    newnode ->rlink = NULL;
+    newnode-> llink = NULL;
+
+    if(h ->rlink == h) //리스트가 공백일 때
+    {
+      
         h->rlink = newnode;
         last = newnode;
         newnode->rlink = h;
@@ -288,7 +291,6 @@ int deleteLast(listNode* h)
      }
 	
    
-     
 	return 1;
 }
 
@@ -307,6 +309,7 @@ int insertFirst(listNode* h, int key)
 	}
 	
 	listNode *newnode = (listNode *)malloc(sizeof(listNode));
+
 	newnode->key = key;
 	newnode->rlink = NULL;
 	newnode->llink = NULL;
@@ -314,18 +317,19 @@ int insertFirst(listNode* h, int key)
 	listNode *A = h->rlink ;
 	listNode *B = h->rlink ;
 
-	if(h->rlink == h)
+	if(h->rlink == h) //head노드 외에 아무런 노드가 존재하지 않을 경우
 	{
 
 		h->rlink = newnode; 
 		newnode->llink = h;
+
 		h->llink = newnode;
 		newnode->rlink = h;
 
 		return 0;
 
 	}
-	else 
+	else //head노드 뒤에 노드가 존재하는 경우
 	{
 		newnode->rlink = h->rlink ;
 		newnode->rlink->llink = newnode;
@@ -351,15 +355,15 @@ int deleteFirst(listNode* h)
 	
 	listNode *A = h->rlink ;
 
-	if(h->rlink == h)
+	if(h->rlink == h) //head노드를 제외하고 아무런 노드가 존재하지 않을 때
 	{
 		printf("리스트에 노드가 존재하지 않습니다. \n");
 	    
 		return 0;
 	}
-	else 
+	else //head노드 뒤에 노드가 존재할 경우
 	{
-		if(A->rlink == h)
+		if(A->rlink == h) //head뒤에 노드가 1개 존재하는 경우
 		{
 			h->rlink = h;
 			h->llink = h;
@@ -371,7 +375,7 @@ int deleteFirst(listNode* h)
 
             return 0;	
 		}
-		else 
+		else //head뒤에 노드가 2개 이상 존재하는 경우
 		{
             h->rlink = A->rlink ;
 			A->rlink->llink = h;
@@ -446,19 +450,21 @@ int insertNode(listNode* h, int key)
     listNode *A = h->rlink ;
 	listNode *B = h->rlink ;
 
-    if(h->rlink == h)
+    if(h->rlink == h) //리스트에 head노드만 존재하는 경우
 	{
+
 		h->rlink = newnode;
 		h->llink = newnode;
+
 		newnode->rlink = h;
 		newnode->llink = h;
 
 		return 0;
 
 	}
-	else 
+	else //head노드 뒤에 노드가 존재하는 경우
 	{
-		if(A->key >= key)
+		if(A->key >= key) //첫번째 노드 위치에 삽입될 경우
 		{
 			newnode->rlink = h->rlink;
 			newnode->rlink->llink = newnode;
@@ -467,7 +473,7 @@ int insertNode(listNode* h, int key)
 
 			return 0;
 		}
-		else
+		else //노드가 중간 또는 마지막에 삽입되는 경우
 		{
 			while(A->rlink != h)
 			{
@@ -488,6 +494,7 @@ int insertNode(listNode* h, int key)
 			}
 			newnode->rlink = A->rlink;
 			newnode->rlink->llink = newnode;
+			
 			newnode->llink = A;
 			newnode->llink->rlink =newnode;
 
@@ -533,6 +540,7 @@ int deleteNode(listNode* h, int key)
 				A->llink = NULL;
 
 				free(A);
+
 				return 0;
 			}
 			else //head노드 뒤 노드가 2개이상 존재하는 경우
@@ -578,7 +586,7 @@ int deleteNode(listNode* h, int key)
 						A->llink = NULL;
 
 						free(A);
-						
+
 						return 0;
 					}
 					
