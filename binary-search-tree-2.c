@@ -150,18 +150,18 @@ void recursiveInorder(Node* ptr)
  */
 void iterativeInorder(Node* node)
 {
-    int top =-1; //½ºÅÃÀ» ÃÊ±âÈ­ 
+    int top =-1; //ìŠ¤íƒì„ ì´ˆê¸°í™” 
 
 	Node stack[MAX_STACK_SIZE];
 	for(;;)
 	{
 		for(;node;node = node->left)
 		{
-			push(node); //½ºÅÃ¿¡ »ğÀÔÇÏ´Â ¸í·É¾î
+			push(node); //ìŠ¤íƒì— ì‚½ì…í•˜ëŠ” ëª…ë ¹ì–´
 		}
-		node = pop(); //½ºÅÃ¿¡¼­ »èÁ¦ÇÏ¶ó´Â ¸í·É¾î
+		node = pop(); //ìŠ¤íƒì—ì„œ ì‚­ì œí•˜ë¼ëŠ” ëª…ë ¹ì–´
 
-		if(!node) //°ø¹é½ºÅÃ
+		if(!node) //ê³µë°±ìŠ¤íƒ
 		{
 			break;
 		}
@@ -175,24 +175,24 @@ void iterativeInorder(Node* node)
 /**
  * textbook: p 225
  */
-void levelOrder(Node* ptr) //queue¸¦ ¾Æ¿ëÇÑ level ¼øÈ¸
+void levelOrder(Node* ptr) //queueë¥¼ ì•„ìš©í•œ level ìˆœíšŒ
 {
     int front = 0; 
 	int rear = 0;
 
 	Node* queue[MAX_QUEUE_SIZE];
 
-	if(!ptr) //°ø¹é Æ®¸®ÀÏ °æ¿ì
+	if(!ptr) //ê³µë°± íŠ¸ë¦¬ì¼ ê²½ìš°
 		return ;
 	
-	enQueue(ptr); //Å¥¿¡ ptr³ëµå¸¦ ³Ö¾îÁØ´Ù.
+	enQueue(ptr); //íì— ptrë…¸ë“œë¥¼ ë„£ì–´ì¤€ë‹¤.
 
 	for(;;)
 	{
-		ptr = deQueue(); //deQueue¿¬»êÀ¸·Î ptr¿¡ ³Ö¾îÁØ´Ù.
+		ptr = deQueue(); //deQueueì—°ì‚°ìœ¼ë¡œ ptrì— ë„£ì–´ì¤€ë‹¤.
 		if(ptr)
 		{
-			printf(" [%d] ", ptr->key); //¹İÈ¯ÇÑ ptrÀÇ key°ªÀ» Ãâ·ÂÇÑ´Ù.
+			printf(" [%d] ", ptr->key); //ë°˜í™˜í•œ ptrì˜ keyê°’ì„ ì¶œë ¥í•œë‹¤.
 			if(ptr->left)
 			{
 				enQueue(ptr->left);
@@ -258,8 +258,8 @@ int deleteNode(Node* head, int key)
 	Node *A = head->left;
 	Node *B = NULL;
 
-    /* »èÁ¦ÇÏ°íÀÚ ÇÏ´Â ³ëµå = A , AÀÇ ºÎ¸ğ ³ëµå = B */
-	while(head->left != NULL && A->key != key) //ÀÔ·ÂÇÑ key°ª°ú µ¿ÀÏÇÑ key¸¦ °¡Áø ³ëµå¸¦ Ã£´Â °úÁ¤
+    /* ì‚­ì œí•˜ê³ ì í•˜ëŠ” ë…¸ë“œ = A , Aì˜ ë¶€ëª¨ ë…¸ë“œ = B */
+	while(head->left != NULL && A->key != key) //ì…ë ¥í•œ keyê°’ê³¼ ë™ì¼í•œ keyë¥¼ ê°€ì§„ ë…¸ë“œë¥¼ ì°¾ëŠ” ê³¼ì •
 	{
 		B = A;
 
@@ -273,22 +273,24 @@ int deleteNode(Node* head, int key)
 			A = B->right;
 
 		}
+		if(A == NULL ) //ì…ë ¥í•œ keyë¥¼ ê°€ì§„ ë…¸ë“œê°€ ì—†ì„ ê²½ìš°
+	    {
+		  printf("ì°¾ìœ¼ì‹œëŠ” ë…¸ë“œëŠ” ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤ . \n"); 
+		  break;
+
+	    } 
 		
 	}
-	if(A == NULL ) //ÀÔ·ÂÇÑ key¸¦ °¡Áø ³ëµå°¡ ¾øÀ» °æ¿ì
-	{
-		printf("Ã£À¸½Ã´Â ³ëµå´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù . \n"); 
-		return ;
-	}
+	
 
-	if(head->left == NULL) //head³ëµå¸¸ Á¸ÀçÇÏ´Â °æ¿ì
+	if(head->left == NULL) //headë…¸ë“œë§Œ ì¡´ì¬í•˜ëŠ” ê²½ìš°
 	{
-		printf("³ëµå°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù. \n");
+		printf("ë…¸ë“œê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. \n");
 		return 0;
 
 	}
 
-	if(A->left == NULL && A->right == NULL) //case1 : »èÁ¦ÇÏ°íÀÚ ÇÏ´Â ³ëµå°¡ ´Ü¸»³ëµåÀÏ °æ¿ì
+	if(A->left == NULL && A->right == NULL) //case1 : ì‚­ì œí•˜ê³ ì í•˜ëŠ” ë…¸ë“œê°€ ë‹¨ë§ë…¸ë“œì¼ ê²½ìš°
 	{
 		if(B != NULL)
 		{
@@ -307,11 +309,11 @@ int deleteNode(Node* head, int key)
 			head->left = NULL;
 		}
 	}
-	else if(A->left == NULL || A->right == NULL) //case2 : ÇÏ³ªÀÇ ÀÚ½ÄÀ» °¡Áø ºñ¸®ÇÁ ³ëµåÀÇ »èÁ¦
+	else if(A->left == NULL || A->right == NULL) //case2 : í•˜ë‚˜ì˜ ìì‹ì„ ê°€ì§„ ë¹„ë¦¬í”„ ë…¸ë“œì˜ ì‚­ì œ
 	{
-		if(A->left == NULL && A->right != NULL) //¿ŞÂÊ ÀÚ½ÄÀÌ ¾ø°í ¿À¸¥ÂÊ ÀÚ½ÄÀº ÀÖ´Â °æ¿ì 
+		if(A->left == NULL && A->right != NULL) //ì™¼ìª½ ìì‹ì´ ì—†ê³  ì˜¤ë¥¸ìª½ ìì‹ì€ ìˆëŠ” ê²½ìš° 
 		{
-			if(B->left == A) //»èÁ¦ÇÒ ³ëµå°¡ ºÎ¸ğ ³ëµåÀÇ °ª º¸´Ù ÀÛÀ» °æ¿ì
+			if(B->left == A) //ì‚­ì œí•  ë…¸ë“œê°€ ë¶€ëª¨ ë…¸ë“œì˜ ê°’ ë³´ë‹¤ ì‘ì„ ê²½ìš°
 			{
 				B->left = A->right;
 
@@ -319,7 +321,7 @@ int deleteNode(Node* head, int key)
 			
 				free(A);
 			}
-			else if(B->right == A)//»èÁ¦ÇÒ ³ëµå°¡ ºÎ¸ğ³ëµåº¸´Ù °ªÀÌ Å¬ °æ¿ì
+			else if(B->right == A)//ì‚­ì œí•  ë…¸ë“œê°€ ë¶€ëª¨ë…¸ë“œë³´ë‹¤ ê°’ì´ í´ ê²½ìš°
 			{
 				B->right = A->right ;
 
@@ -329,16 +331,16 @@ int deleteNode(Node* head, int key)
 
 			}
 		}
-		else if(A->left != NULL && A->right == NULL)//¿ŞÂÊ ÀÚ½ÄÀÌ ÀÖ°í ¿À¸¥ÂÊ ÀÚ½ÄÀÌ ¾ø´Â °æ¿ì
+		else if(A->left != NULL && A->right == NULL)//ì™¼ìª½ ìì‹ì´ ìˆê³  ì˜¤ë¥¸ìª½ ìì‹ì´ ì—†ëŠ” ê²½ìš°
 		{
-			if(B->right == A) //»èÁ¦ÇÒ ³ëµå°¡ ºÎ¸ğ ³ëµåÀÇ °ª º¸´Ù Å« °æ¿ì
+			if(B->right == A) //ì‚­ì œí•  ë…¸ë“œê°€ ë¶€ëª¨ ë…¸ë“œì˜ ê°’ ë³´ë‹¤ í° ê²½ìš°
 			{
 				B->right = A->left ;
 				A->left= NULL;
 
 				free(A);
 			}
-			else if(B->left == A) //»èÁ¦ÇÏ°íÀÚ ÇÏ´Â ³ëµå°¡ ºÎ¸ğ³ëµåº¸´Ù ÀÛÀº °ªÀ» °¡Áö´Â °æ¿ì
+			else if(B->left == A) //ì‚­ì œí•˜ê³ ì í•˜ëŠ” ë…¸ë“œê°€ ë¶€ëª¨ë…¸ë“œë³´ë‹¤ ì‘ì€ ê°’ì„ ê°€ì§€ëŠ” ê²½ìš°
 			{
 				B->left = A->left;
 				A->left = NULL;
@@ -348,12 +350,12 @@ int deleteNode(Node* head, int key)
 		}
 
 	}
-	else  //case 3 :  µÎ °³ÀÇ ÀÚ½ÄÀ» °¡Áø non-leaf ³ëµåÀÇ »èÁ¦ 
+	else  //case 3 :  ë‘ ê°œì˜ ìì‹ì„ ê°€ì§„ non-leaf ë…¸ë“œì˜ ì‚­ì œ 
 	{
-		/* ¿À¸¥ÂÊ ³ëµå¿¡¼­ °¡Àå ÀÛÀº °ªÀ» °¡Áø ³ëµå¸¦ »èÁ¦ÇÒ ³ëµåÀÇ ÀÚ¸®·Î °¡Áö°í ¿À´Â ¹æ¹ıÀ» »ç¿ë */
+		/* ì˜¤ë¥¸ìª½ ë…¸ë“œì—ì„œ ê°€ì¥ ì‘ì€ ê°’ì„ ê°€ì§„ ë…¸ë“œë¥¼ ì‚­ì œí•  ë…¸ë“œì˜ ìë¦¬ë¡œ ê°€ì§€ê³  ì˜¤ëŠ” ë°©ë²•ì„ ì‚¬ìš© */
 
-		Node *C = A->right; //C = »èÁ¦ÇÏ°íÀÚ ÇÏ´Â ³ëµå ±âÁØ¿¡¼­ ¿À¸¥ÂÊ Æ®¸®Áß °¡Àå ÀÛÀº °ªÀ» °¡Áö´Â ³ëµå
-		Node *D = A; //C³ëµåÀÇ ºÎ¸ğ ³ëµå
+		Node *C = A->right; //C = ì‚­ì œí•˜ê³ ì í•˜ëŠ” ë…¸ë“œ ê¸°ì¤€ì—ì„œ ì˜¤ë¥¸ìª½ íŠ¸ë¦¬ì¤‘ ê°€ì¥ ì‘ì€ ê°’ì„ ê°€ì§€ëŠ” ë…¸ë“œ
+		Node *D = A; //Cë…¸ë“œì˜ ë¶€ëª¨ ë…¸ë“œ
 
         
 		while(C->left != NULL ) 
@@ -407,7 +409,7 @@ int freeBST(Node* head)
 
 
 
-Node* pop()  //stack¿¡¼­ »èÁ¦ÇÏ´Â °æ¿ì
+Node* pop()  //stackì—ì„œ ì‚­ì œí•˜ëŠ” ê²½ìš°
 {
 	Node *A = NULL;
 
@@ -421,7 +423,7 @@ Node* pop()  //stack¿¡¼­ »èÁ¦ÇÏ´Â °æ¿ì
 	}
 }
 
-void push(Node* aNode) //stack¿¡¼­ »ğÀÔÇÏ´Â °æ¿ì
+void push(Node* aNode) //stackì—ì„œ ì‚½ì…í•˜ëŠ” ê²½ìš°
 {
 	if(top < MAX_STACK_SIZE -1)
 	{
@@ -432,7 +434,7 @@ void push(Node* aNode) //stack¿¡¼­ »ğÀÔÇÏ´Â °æ¿ì
 
 
 
-Node* deQueue() //queue¿¡¼­ »èÁ¦ÇÏ´Â °æ¿ì
+Node* deQueue() //queueì—ì„œ ì‚­ì œí•˜ëŠ” ê²½ìš°
 {
     Node* A = NULL;
 
@@ -454,7 +456,7 @@ Node* deQueue() //queue¿¡¼­ »èÁ¦ÇÏ´Â °æ¿ì
 	
 }
 
-void enQueue(Node* aNode) //queue¿¡¼­ »ğÀÔÇÏ´Â °æ¿ì
+void enQueue(Node* aNode) //queueì—ì„œ ì‚½ì…í•˜ëŠ” ê²½ìš°
 {
 	if(rear == MAX_QUEUE_SIZE -1)
 	{
