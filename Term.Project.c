@@ -1,12 +1,12 @@
-/* ÀÎÁ¢¸®½ºÆ®¸¦ »ç¿ëÇÏ¿© ±×·¡ÇÁ ±¸Çö */
+/* ì¸ì ‘ë¦¬ìŠ¤íŠ¸ë¥¼ ì‚¬ìš©í•˜ì—¬ ê·¸ë˜í”„ êµ¬í˜„ */
 
 #include<stdio.h>
-#include<stdlib.h> //µ¿ÀûÇÒ´çÀ» ÇÏ±â À§ÇØ 
+#include<stdlib.h> //ë™ì í• ë‹¹ì„ í•˜ê¸° ìœ„í•´ 
 
-#define MAX_VERTEX   20   // = headNode ¶ÇÇÑ ÃÖ´ë 20°³±îÁö »ı¼º°¡´É
+#define MAX_VERTEX   20   // = headNode ë˜í•œ ìµœëŒ€ 20ê°œê¹Œì§€ ìƒì„±ê°€ëŠ¥
 int visited[MAX_VERTEX];
 
-/* ±¸Á¶Ã¼ Á¤ÀÇ */
+/* êµ¬ì¡°ì²´ ì •ì˜ */
 
 typedef struct Vertex
 {
@@ -25,7 +25,7 @@ typedef struct Graph  //list of all vertices : vlist[MAX_VERTEX]
     VertexHead* vlist; 
 }Graph;
 
-/* ÇÔ¼ö¿øÇü Á¤ÀÇ */
+/* í•¨ìˆ˜ì›í˜• ì •ì˜ */
 
 void createGraph(VertexHead** h);          /* empty graph cration */
 void destroyGraph(VertexHead** h);         /* deallocationg all allocated memory */
@@ -57,7 +57,7 @@ void enQueue(int A);
 
 
 
-/* ¸ŞÀÎÇÔ¼ö */
+/* ë©”ì¸í•¨ìˆ˜ */
 int main()
 {
 
@@ -138,16 +138,16 @@ switch (command) {
 
 
 
-void createGraph(VertexHead** h)   //±×·¡ÇÁ¸¦ ÃÊ±âÈ­ÇÏ´Â ÇÔ¼ö
+void createGraph(VertexHead** h)   //ê·¸ë˜í”„ë¥¼ ì´ˆê¸°í™”í•˜ëŠ” í•¨ìˆ˜
 {
-   if (*h != NULL) //±×·¡ÇÁ°¡ Á¸ÀçÇÏ´Â °æ¿ì
+   if (*h != NULL) //ê·¸ë˜í”„ê°€ ì¡´ì¬í•˜ëŠ” ê²½ìš°
    {    
-      destroyGraph(*h); //±×·¡ÇÁ°¡ Á¸ÀçÇÏ¸é ÆÄ±«ÇØÁØ´Ù.
+      destroyGraph(*h); //ê·¸ë˜í”„ê°€ ì¡´ì¬í•˜ë©´ íŒŒê´´í•´ì¤€ë‹¤.
    }
 
-   *h= (VertexHead*)malloc(sizeof(VertexHead)*MAX_VERTEX);  //headNodeµéÀÌ MAX_VERTEX¸¸Å­ µé¾îÀÖ´Â h¹è¿­À» »ı¼º
+   *h= (VertexHead*)malloc(sizeof(VertexHead)*MAX_VERTEX);  //headNodeë“¤ì´ MAX_VERTEXë§Œí¼ ë“¤ì–´ìˆëŠ” hë°°ì—´ì„ ìƒì„±
 
-   /* ¹è¿­ÀÇ ¸ğµç headNodeµéÀ» NULL·Î ÃÊ±âÈ­ */ 
+   /* ë°°ì—´ì˜ ëª¨ë“  headNodeë“¤ì„ NULLë¡œ ì´ˆê¸°í™” */ 
    for (int i = 0; i < MAX_VERTEX; i++) 
    {      
 	    (*h)[i].head = NULL; 
@@ -156,14 +156,14 @@ void createGraph(VertexHead** h)   //±×·¡ÇÁ¸¦ ÃÊ±âÈ­ÇÏ´Â ÇÔ¼ö
    return *h;
 }
 
-void destroyGraph(VertexHead** h) //µ¿ÀûÇÒ´ç ÇØÁ¦ ÇÔ¼ö
+void destroyGraph(VertexHead** h) //ë™ì í• ë‹¹ í•´ì œ í•¨ìˆ˜
 {
-	if(h == NULL) //±×·¡ÇÁ¿¡ ¾Æ¹«°Íµµ ¾ø´Â °æ¿ì
+	if(h == NULL) //ê·¸ë˜í”„ì— ì•„ë¬´ê²ƒë„ ì—†ëŠ” ê²½ìš°
 	{
-		printf("±×·¡ÇÁ¿¡ ¾Æ¹«°Íµµ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù. \n");
+		printf("ê·¸ë˜í”„ì— ì•„ë¬´ê²ƒë„ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. \n");
 		return ;
 	}
-	else //±×·¡ÇÁ¿¡ ¹«¾ğ°¡ Á¸ÀçÇÏ¿© »èÁ¦ÇÒ ÀÏÀÌ ¹ß»ıÇÑ °æ¿ì
+	else //ê·¸ë˜í”„ì— ë¬´ì–¸ê°€ ì¡´ì¬í•˜ì—¬ ì‚­ì œí•  ì¼ì´ ë°œìƒí•œ ê²½ìš°
 	{
 	   for(int i=0; i< MAX_VERTEX; i++)
 	    {
@@ -173,16 +173,16 @@ void destroyGraph(VertexHead** h) //µ¿ÀûÇÒ´ç ÇØÁ¦ ÇÔ¼ö
 	}
 }
 
-int insertVertex(VertexHead* h,int A) //ÀÔ·Â¹ŞÀº ¼ıÀÚ¸¦ numÀ¸·Î °¡Áø Á¤Á¡À» »ı¼ºÇÏ´Â ÇÔ¼ö 
+int insertVertex(VertexHead* h,int A) //ì…ë ¥ë°›ì€ ìˆ«ìë¥¼ numìœ¼ë¡œ ê°€ì§„ ì •ì ì„ ìƒì„±í•˜ëŠ” í•¨ìˆ˜ 
 {
-	Vertex* v = h[A].head;  //¿ä¼ÒA¹øÂ° ¹è¿­¿¡ ÇØ´çÇÏ´Â Á¤Á¡ v ¼±¾ğ
+	Vertex* v = h[A].head;  //ìš”ì†ŒAë²ˆì§¸ ë°°ì—´ì— í•´ë‹¹í•˜ëŠ” ì •ì  v ì„ ì–¸
 	Vertex* tmp  = NULL;    
 
 	tmp = (Vertex *)malloc(sizeof(Vertex));
 	tmp -> num = 1;
 	tmp -> link = NULL;
 
-	if(v == NULL) //ÀÔ·ÂÇÑ Á¤Á¡ÀÌ ¾ø´Ù¸é
+	if(v == NULL) //ì…ë ¥í•œ ì •ì ì´ ì—†ë‹¤ë©´
 	{
 		v  = tmp;
 		v->num = A;
@@ -192,9 +192,9 @@ int insertVertex(VertexHead* h,int A) //ÀÔ·Â¹ŞÀº ¼ıÀÚ¸¦ numÀ¸·Î °¡Áø Á¤Á¡À» »ı¼º
 	return v;
 }
 
-void deleteVertex(VertexHead* h, int A)  //Á¤Á¡À» »èÁ¦ÇÏ´Â ÇÔ¼ö
+void deleteVertex(VertexHead* h, int A)  //ì •ì ì„ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜
 {
-	/* ±×·¡ÇÁ³»¿¡ Á¸ÀçÇÏ´Â Á¤Á¡ÀÇ °³¼ö¸¦ È®ÀÎÇÏ±â À§ÇÑ ºÎºĞ */
+	/* ê·¸ë˜í”„ë‚´ì— ì¡´ì¬í•˜ëŠ” ì •ì ì˜ ê°œìˆ˜ë¥¼ í™•ì¸í•˜ê¸° ìœ„í•œ ë¶€ë¶„ */
 	int n=0;
 	
 	for(int i=0; i<MAX_VERTEX; i++)
@@ -206,10 +206,10 @@ void deleteVertex(VertexHead* h, int A)  //Á¤Á¡À» »èÁ¦ÇÏ´Â ÇÔ¼ö
 	}
 	return n;
 
-	/* ±×·¡ÇÁ¿¡ ¾Æ¿¹ Á¤Á¡ÀÌ Á¸ÀçÇÏÁö ¾Ê´Â °æ¿ì */
+	/* ê·¸ë˜í”„ì— ì•„ì˜ˆ ì •ì ì´ ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ìš° */
 	if(n = 0 )
 	{
-		printf("»èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù. \n");
+		printf("ì‚­ì œí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. \n");
 		return ;
 	}
 	else
@@ -220,7 +220,7 @@ void deleteVertex(VertexHead* h, int A)  //Á¤Á¡À» »èÁ¦ÇÏ´Â ÇÔ¼ö
 }
 
 
-int insertEdge(VertexHead* h, int A, int B) //¸Å°³º¯¼ö·Î ÀÔ·Â¹ŞÀº µÎ Á¤¼ö¸¦ numÀ¸·Î °¡Áø Á¤Á¡µéÀ» °£¼±À¸·Î ¿¬°áÇØÁÖ´Â ÇÔ¼ö
+int insertEdge(VertexHead* h, int A, int B) //ë§¤ê°œë³€ìˆ˜ë¡œ ì…ë ¥ë°›ì€ ë‘ ì •ìˆ˜ë¥¼ numìœ¼ë¡œ ê°€ì§„ ì •ì ë“¤ì„ ê°„ì„ ìœ¼ë¡œ ì—°ê²°í•´ì£¼ëŠ” í•¨ìˆ˜
 {
     
 	Vertex* q  = h[A].head;
@@ -234,7 +234,7 @@ int insertEdge(VertexHead* h, int A, int B) //¸Å°³º¯¼ö·Î ÀÔ·Â¹ŞÀº µÎ Á¤¼ö¸¦ numÀ
 
 	if(q == NULL)
 	{
-		printf("¿¬°áÇÒ ¼ö ¾ø½À´Ï´Ù. \n");
+		printf("ì—°ê²°í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. \n");
 		return ;
 	}
 	else 
@@ -248,26 +248,26 @@ int insertEdge(VertexHead* h, int A, int B) //¸Å°³º¯¼ö·Î ÀÔ·Â¹ŞÀº µÎ Á¤¼ö¸¦ numÀ
 }
 
 
-void deleteEdge(VertexHead* h, int A, int B)  //A¿Í B¸¦ numÀ¸·Î °¡Áø µÎ Á¤Á¡ »çÀÌÀÇ °£¼±À» »èÁ¦ÇÏ´Â ÇÔ¼ö
+void deleteEdge(VertexHead* h, int A, int B)  //Aì™€ Bë¥¼ numìœ¼ë¡œ ê°€ì§„ ë‘ ì •ì  ì‚¬ì´ì˜ ê°„ì„ ì„ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜
 {
 	
 	Vertex* Q = ((h)[A].head)->link;
 	Vertex* W = NULL;
 
-	if (h == NULL) //headVertex´ÙÀ½ ³ëµå°¡ Á¸ÀçÇÏÁö ¾ÊÀ» ¶§
+	if (h == NULL) //headVertexë‹¤ìŒ ë…¸ë“œê°€ ì¡´ì¬í•˜ì§€ ì•Šì„ ë•Œ
 	{
-		printf("»èÁ¦ÇÒ ³ëµå°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù. \n");
+		printf("ì‚­ì œí•  ë…¸ë“œê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. \n");
 	}
-	/* Á¦°ÅÇÒ ³ëµå°¡
+	/* ì œê±°í•  ë…¸ë“œê°€
 
-	1. Ã³À½¿¡ À§Ä¡ÇÒ °æ¿ì
-	2. Áß°£¿¡ À§Ä¡ÇÒ °æ¿ì
-	3. ¸¶Áö¸·¿¡ À§Ä¡ÇÒ °æ¿ì
+	1. ì²˜ìŒì— ìœ„ì¹˜í•  ê²½ìš°
+	2. ì¤‘ê°„ì— ìœ„ì¹˜í•  ê²½ìš°
+	3. ë§ˆì§€ë§‰ì— ìœ„ì¹˜í•  ê²½ìš°
 
-	·Î ³ª´©¾î¼­ ±¸ÇöÇÏ¿´´Ù.
+	ë¡œ ë‚˜ëˆ„ì–´ì„œ êµ¬í˜„í•˜ì˜€ë‹¤.
 	*/
 	else
-	{   /* Á¦°ÅÇÒ ³ëµå°¡ Çìµå ´ÙÀ½¿¡ À§Ä¡ÇÏ´Â ³ëµåÀÏ ¶§ */
+	{   /* ì œê±°í•  ë…¸ë“œê°€ í—¤ë“œ ë‹¤ìŒì— ìœ„ì¹˜í•˜ëŠ” ë…¸ë“œì¼ ë•Œ */
 		if (Q->num == B)
 		{
 			((h)[A].head)->link = Q->link;
@@ -300,18 +300,8 @@ void deleteEdge(VertexHead* h, int A, int B)  //A¿Í B¸¦ numÀ¸·Î °¡Áø µÎ Á¤Á¡ »çÀ
 	}
 	return 0;
 }
-/*
-void depthFS(VertexHead* h, int v)
-{
-	
-}
-*/
-void breadthFS(VertexHead*h, int v)
-{
 
-}
-
-/* void depthFS(VertexHead* h, int v) //±íÀÌ ¿ì¼± Å½»ö ( v = ¹æ¹®ÇÒ Á¤Á¡ÀÇ vertex ¹øÈ£ ) & stack ÀÌ¿ë
+/* void depthFS(VertexHead* h, int v) //ê¹Šì´ ìš°ì„  íƒìƒ‰ ( v = ë°©ë¬¸í•  ì •ì ì˜ vertex ë²ˆí˜¸ ) & stack ì´ìš©
 {
 	
 	int n=0;
@@ -342,16 +332,16 @@ void breadthFS(VertexHead*h, int v)
 */
 void depthFS(VertexHead* h, int v)
 {
-	int visited[MAX_VERTEX]; //¹æ¹®À» ±â·ÏÇÏ±â À§ÇØ ¼±¾ğ
+	int visited[MAX_VERTEX]; //ë°©ë¬¸ì„ ê¸°ë¡í•˜ê¸° ìœ„í•´ ì„ ì–¸
 	Vertex* w;
 
 	push(v);
 
-	//1ÀÇ °ªÀ» °¡Áö°í ÀÖÀ¸¸é ¹æ¹®ÇÑ °ÍÀÌ°í, 0(NULL)ÀÇ °ªÀ» °¡Áö°í ÀÖÀ¸¸é ¹æ¹®ÇÏÁö ¾ÊÀ½À» ³ªÅ¸³½´Ù.
-	visited[v] = 1; //Á¤Á¡ v¸¦ ¹æ¹®Çß´Ù°í ±â·Ï
+	//1ì˜ ê°’ì„ ê°€ì§€ê³  ìˆìœ¼ë©´ ë°©ë¬¸í•œ ê²ƒì´ê³ , 0(NULL)ì˜ ê°’ì„ ê°€ì§€ê³  ìˆìœ¼ë©´ ë°©ë¬¸í•˜ì§€ ì•ŠìŒì„ ë‚˜íƒ€ë‚¸ë‹¤.
+	visited[v] = 1; //ì •ì  vë¥¼ ë°©ë¬¸í–ˆë‹¤ê³  ê¸°ë¡
 	printf("[ %d ]", v);
 
-    while(top != -1) //½ºÅÃÀÌ °ø¹éÀÌ ¾Æ´Ò °æ¿ì¸¦ Á¶°ÇÀ¸·Î ÇÏ¿© ¹İº¹¹®¼³Á¤
+    while(top != -1) //ìŠ¤íƒì´ ê³µë°±ì´ ì•„ë‹ ê²½ìš°ë¥¼ ì¡°ê±´ìœ¼ë¡œ í•˜ì—¬ ë°˜ë³µë¬¸ì„¤ì •
 	{
 		w = h[v].head;
 		while(w)
@@ -359,71 +349,32 @@ void depthFS(VertexHead* h, int v)
 			if(visited[w->num] == NULL)
 			{
 				push(w->num);
-				visited[w->num] = 1; //¹æ¹®ÇÔÀ» ±â·Ï
+				visited[w->num] = 1; //ë°©ë¬¸í•¨ì„ ê¸°ë¡
 				printf("[ %d ]", w->num);
 
 				v = w->num;
 				w = h[v].head;
 			}
-			else //w°¡ ÀÌ¹Ì ¹æ¹®Çß´ø Á¤Á¡ÀÌ¾úÀ» °æ¿ì
+			else //wê°€ ì´ë¯¸ ë°©ë¬¸í–ˆë˜ ì •ì ì´ì—ˆì„ ê²½ìš°
 			{
 				w = w->link;
 			}
 		}
-		/* ´õÀÌ»ó Å½»öÀ» ÇÒ ÀÎÁ¢³ëµå°¡ ¾ø´Â °æ¿ì */
+		/* ë”ì´ìƒ íƒìƒ‰ì„ í•  ì¸ì ‘ë…¸ë“œê°€ ì—†ëŠ” ê²½ìš° */
 		v = pop();
 
 	}
 
 }
-/*
-void breadthFS(VertexHead* h, int v) //A = ¹æ¹®ÇÒ Á¤Á¡ÀÇ Vertex number
-{
-	/*
-	int n=0;
-	
-	for(int i=0; i<MAX_VERTEX; i++)
-	{
-		if ((h)[i].head != NULL)
-		{
-			n++;
-		}
-	}
 
-	int visited[MAX_VERTEX]; 
-	int queue[MAX_VERTEX];
-	int front = rear;
-	int x;
-
-	enqueue(v);
-	printf(" ¹æ¹®ÇÑ vertex : %d \n",v);
-
-	while(front != rear)
-	{
-		v = dequeue();
-
-		for(x=v; x<n; x++) 
-		{
-			if(!visited[x] && (h)[x].head == 1)
-			{
-				(h)[x].head = 1;
-				enqueue(x);
-				printf("¹æ¹®ÇÑ vertex : %d \n",x);
-			}
-		}
-	}
-}
-*/
-
-
-void printGraph(VertexHead* h)  //±×·¡ÇÁÀÇ °ü°è¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void printGraph(VertexHead* h)  //ê·¸ë˜í”„ì˜ ê´€ê³„ë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 {
 
  
     Vertex* a ;
 
 
-    printf(" ÀÎÁ¢¸®½ºÆ® \n");
+    printf(" ì¸ì ‘ë¦¬ìŠ¤íŠ¸ \n");
 
     for(int i=0; i<MAX_VERTEX; i++)
     {
@@ -444,7 +395,7 @@ void printGraph(VertexHead* h)  //±×·¡ÇÁÀÇ °ü°è¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
 }
 
 
-/* ½ºÅÃ ±¸ÇöÀ» À§ÇØ ÇÊ¿äÇÑ ÇÔ¼ö */
+/* ìŠ¤íƒ êµ¬í˜„ì„ ìœ„í•´ í•„ìš”í•œ í•¨ìˆ˜ */
 int pop()  
 {
 	int A = 0;
@@ -469,7 +420,7 @@ void push(int A)
 }
 
 
-/* Å¥ ±¸ÇöÀ» À§ÇØ ÇÊ¿äÇÑ ÇÔ¼ö */
+/* í êµ¬í˜„ì„ ìœ„í•´ í•„ìš”í•œ í•¨ìˆ˜ */
 int deQueue() 
 {
     int A = 0;
